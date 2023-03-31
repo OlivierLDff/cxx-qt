@@ -122,6 +122,12 @@ function(add_qml_test TEST_NAME)
 
     add_test(NAME ${APP_NAME}_${TEST_NAME}_test COMMAND ${CMAKE_CURRENT_BINARY_DIR}/${TEST_NAME}/${APP_NAME}_${TEST_NAME}_test${EXE_SUFFIX} WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/${TEST_NAME})
 
+    # RUNTIME_ENV comes from the CMakeLists.txt at the root of this repository.
+    set_tests_properties(
+        ${APP_NAME}_${TEST_NAME}_test PROPERTIES ENVIRONMENT_MODIFICATION
+                                                 "${RUNTIME_ENV}"
+    )
+
     add_valgrind_test(${APP_NAME}_${TEST_NAME}_test ${CMAKE_CURRENT_BINARY_DIR}/${TEST_NAME}/${APP_NAME}_${TEST_NAME}_test${EXE_SUFFIX} ${CMAKE_CURRENT_BINARY_DIR}/${TEST_NAME})
 
     set_target_properties(${APP_NAME}_${TEST_NAME}_test PROPERTIES
