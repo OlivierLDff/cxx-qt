@@ -72,15 +72,17 @@ target_link_libraries(
 )
 qt_import_qml_plugins(${APP_TEST_NAME})
 
+set(TEST_CMD
+    $<TARGET_FILE:${APP_TEST_NAME}> -input ${CMAKE_CURRENT_SOURCE_DIR}/tests
+)
+
 add_test(
     NAME ${APP_TEST_NAME}
-    COMMAND $<TARGET_FILE:${APP_TEST_NAME}> -input
-            ${CMAKE_CURRENT_SOURCE_DIR}/tests
+    COMMAND ${TEST_CMD}
 )
 
 add_valgrind_test(
-    ${APP_TEST_NAME} "$<TARGET_FILE:${APP_TEST_NAME}> -input
-    ${CMAKE_CURRENT_SOURCE_DIR}/tests" ${CMAKE_CURRENT_BINARY_DIR}
+    ${APP_TEST_NAME} "${TEST_CMD}" ${CMAKE_CURRENT_BINARY_DIR}
 )
 
 set_tests_properties(

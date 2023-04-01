@@ -20,7 +20,7 @@ target_link_libraries(${APP_NAME} Qt::QuickTest)
 add_dependencies(${APP_NAME} core_qmlplugin)
 
 set(test_cmd
-    "./${APP_NAME}"
+    "$<TARGET_FILE:${APP_NAME}>"
     -import
     "${CMAKE_CURRENT_BINARY_DIR}/../qml"
     -input
